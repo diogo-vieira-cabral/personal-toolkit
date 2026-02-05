@@ -3,7 +3,7 @@ import shutil  # Function library for moving files
 import time    # Function library for handling time
 
 # --- CONFIGURATION ---
-SIMULATION_MODE = True  # Change to False to execute real moves
+SIMULATION_MODE = False  # Change to False to execute real moves
 # VARIABLE: The path to your downloads. expanduser handles the Mac/Windows difference.
 download_folder = os.path.expanduser("~/Downloads")
 # VARIABLE: Constant for 7 days in seconds.
@@ -13,10 +13,10 @@ current_time = time.time()
 
 # VARIABLE: Dictionary mapping folder names to lists of extensions.
 file_types = {
-    "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg"],
-    "Videos": [".mp4", ".mkv", ".flv", ".avi", ".mov", ".wmv"],
-    "Music": [".mp3", ".wav", ".acc", ".flac", ".ogg", ".m4a"],
-    "Documents": [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".csv", ".pptx"]
+    "_Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg"],
+    "_Videos": [".mp4", ".mkv", ".flv", ".avi", ".mov", ".wmv"],
+    "_Music": [".mp3", ".wav", ".acc", ".flac", ".ogg", ".m4a"],
+    "_Documents": [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".csv", ".pptx"]
 }
 
 print(f"--- ORGANIZER STARTING (Simulation: {SIMULATION_MODE}) ---")
@@ -37,12 +37,12 @@ for filename in os.listdir(download_folder):
 
     # VARIABLE: Splits name from extension. [1] grabs the second part (the extension).
     file_extension = os.path.splitext(filename)[1].lower()
-    dest_folder = "Others"
+    dest_folder = "_Others"
 
     # Screenshot "detour"
     # Logic: Convert to lowercase to check keywords and verify it's an image.
-    if ("screenshot" in filename.lower() or "captura" in filename.lower()) and file_extension in file_types["Images"]:
-        dest_folder = "Screenshots"
+    if ("screenshot" in filename.lower() or "captura" in filename.lower()) and file_extension in file_types["_Images"]:
+        dest_folder = "_Screenshots"
     else:
         # LOOP: Checking the dictionary. 'category' (Key) and 'extensions' (Value).
         for category, extensions in file_types.items():
