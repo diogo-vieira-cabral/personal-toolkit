@@ -3,7 +3,7 @@
 It is too easy for a download folder to become a junk drawer.
 This tool does one thing:
 
-> Automatically organise your Downloads folder by sorting all files into folders you define with a word.
+> Automatically organise your Downloads folder, by sorting all files into folders you define with a word.
 
 It’s designed to be:
 
@@ -12,11 +12,8 @@ It’s designed to be:
 - reversible (you can undo a run)
 - boring in the right ways
 
-This is not a background daemon or a “smart AI tool.”  
-It’s a predictable script you can trust.
-
 ---
-### How does it do it?
+### Hwo does it do it?
 
 - Scans your downloads folder
 - Classifies files based on configurable rules
@@ -29,11 +26,6 @@ Optional:
 
 - dry-run mode (see before anything moves)
 - undo last run
-
-### Requirements
-
-- Python 3.9+
-- Works on macOS / Linux / Windows
     
 ### ⏯️ Usage
 
@@ -62,6 +54,11 @@ File rules live in a separate config file so you don’t need to touch the code.
 - destination folders
 - file extensions
 - naming conventions
+
+### Requirements
+
+- Python 3.9+
+- Works on macOS / Linux / Windows
     
 #### 👮‍♀️ Safety notes
 
