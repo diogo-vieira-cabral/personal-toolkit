@@ -13,7 +13,7 @@ It’s designed to be:
 - boring in the right ways
 
 ---
-### Hwo does it do it?
+### What does it do?
 
 - Scans your downloads folder
 - Classifies files based on configurable rules
