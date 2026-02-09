@@ -75,3 +75,17 @@ File rules live in a separate config file so you don’t need to touch the code.
 Clarity and safety matter more than features.
 This is a personal tool under active iteration.  
 (currently the script only moves files created more than a week ago..looking forward to find an easy way to iterate this option)
+
+#### Folder structure
+
+organizer/
+├── organizer.py
+├── config/
+│   └── file_rules.yaml
+├── core/
+│   ├── classifier.py
+│   ├── mover.py
+│   ├── undo.py
+│   └── logger.py
+├── logs/
+├── README.md
