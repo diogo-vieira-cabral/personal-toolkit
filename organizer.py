@@ -1,25 +1,40 @@
-import os      # Function library for system paths
-import shutil  # Function library for moving files
-import time    # Function library for handling time
+import os
+import shutil
+import time
+import argparse
+import yaml
 
-# --- CONFIGURATION ---
-SIMULATION_MODE = False  # Change to False to execute real moves
+# -----------------------------
+# Parse command-line arguments
+# -----------------------------
+parser = argparse.ArgumentParser(description="Organize your Downloads folder")
+parser.add_argument("--dry-run", action="store_true", help="Simulate file moves without changing anything")
+args = parser.parse_args()
+
+SIMULATION_MODE = args.dry_run
+print("SIMULATION_MODE =", SIMULATION_MODE)
+
+# -----------------------------
+# Load YAML config
+# -----------------------------
+def load_file_rules(path):
+    with open(path, "r") as f:
+        return yaml.safe_load(f)
+
+file_types = load_file_rules("config/file_rules.yaml")
+print("Loaded rules:", file_types)
+
+# -----------------------------
+# Rest of your organizer code
+# -----------------------------
+
+
 # VARIABLE: The path to your downloads. expanduser handles the Mac/Windows difference.
 download_folder = os.path.expanduser("~/Downloads")
-# VARIABLE: Constant for 7 days in seconds.
 SECONDS_IN_WEEK = 604800 
-# VARIABLE: Stores the exact time you ran the script.
-current_time = time.time()
+current_time = time.time() # VARIABLE: Stores the exact time you ran the script.
 
-# VARIABLE: Dictionary mapping folder names to lists of extensions.
-file_types = {
-    "_Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg"],
-    "_Videos": [".mp4", ".mkv", ".flv", ".avi", ".mov", ".wmv"],
-    "_Music": [".mp3", ".wav", ".acc", ".flac", ".ogg", ".m4a"],
-    "_Documents": [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".csv", ".pptx"]
-}
 
-print(f"--- ORGANIZER STARTING (Simulation: {SIMULATION_MODE}) ---")
 
 # LOOP: 'filename' is a variable that changes for every file found in the folder.
 for filename in os.listdir(download_folder):
@@ -35,8 +50,12 @@ for filename in os.listdir(download_folder):
     if (current_time - file_age) < SECONDS_IN_WEEK:
         continue 
 
+
+
+
     # VARIABLE: Splits name from extension. [1] grabs the second part (the extension).
     file_extension = os.path.splitext(filename)[1].lower()
+
     dest_folder = "_Others"
 
     # Screenshot "detour"
@@ -44,12 +63,13 @@ for filename in os.listdir(download_folder):
     if ("screenshot" in filename.lower() or "captura" in filename.lower()) and file_extension in file_types["_Images"]:
         dest_folder = "_Screenshots"
     else:
-        # LOOP: Checking the dictionary. 'category' (Key) and 'extensions' (Value).
         for category, extensions in file_types.items():
-            # LOGIC: If the file extension exists inside the list of extensions.
             if file_extension in extensions:
                 dest_folder = category
                 break
+    print(f"{filename} -> ext: {file_extension} -> category: {dest_folder}")
+
+
     
     # VARIABLE: Creating the final path for the destination folder.
     final_dest_path = os.path.join(download_folder, dest_folder)

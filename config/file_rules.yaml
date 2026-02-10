@@ -1,17 +1,20 @@
-Images:
-  extensions: [".jpg", ".jpeg", ".png", ".gif", ".webp"]
 
-Videos:
-  extensions: [".mp4", ".mov", ".avi"]
+_Images:
+  - .jpg
+  - .jpeg
+  - .png
+  - .gif
 
-Music:
-  extensions: [".mp3", ".wav", ".acc", ".flac", ".ogg", ".m4a"]
+_Videos:
+  - .mp4
+  - .mkv
+  - .mov
 
-Documents:
-  extensions: [".pdf", ".docx", ".xlsx", ".txt"]
+_Music:
+  - .mp3
+  - .wav
 
-Archives:
-  extensions: [".zip", ".tar", ".gz"]
-
-Other:
-  extensions: []
+_Documents:
+  - .pdf
+  - .docx
+  - .xlsx
