@@ -1,0 +1,6 @@
+# Ignore everything EXCEPT your projects
+/*
+!olx-scraper/
+!organizer/ 
+!README.md
+!.gitignore
