@@ -1,0 +1,29 @@
+
+search:
+
+  keywords:
+    - assistente administrativo
+    - assistente contabilidade
+    - analista dados
+
+
+scoring:
+
+  rules:
+    excel: 5
+    contabilidade: 5
+    dados: 5
+    powerbi: 6
+    sql: 8
+    python: 10
+
+
+alerts:
+
+
+  min_score: 15
+
+
+schedule:
+
+  interval_minutes: 30
