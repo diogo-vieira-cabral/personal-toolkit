@@ -22,19 +22,30 @@ The tool only collects **public listing URLs** and does **not retrieve or store 
 #### Project Notes
 
 - [working_notes](docs/working_notes.md)
-- [Configuration](config.yaml)
-- [Scraper Logic](scraper.py)
+- [Configuration](config.yml)
+- [Scraper Logic](src/olx_monitor/scraper.py)
 
 #### Project Structure
 
-olx-job-monitor/
+```text
+olx-scraper/
 │
-├── scraper.py
-├── scorer.py
-├── main.py
-├── config.yaml
+├── .venv/                      # Python virtual environment
+├── data/                       # exported job leads
+├── docs/
+│   └── working_notes.md        # development notes
 │
-├── data/
 ├── logs/
-└── docs/
-    └── working_notes.md
+│   └── monitor.log             # scraper runtime logs
+│
+├── src/
+│   └── olx_monitor/
+│       ├── scraper.py          # OLX scraping logic
+│       └── scorer.py           # keyword scoring system
+│
+├── .gitignore
+├── config.yml                  # search keywords + scoring rules
+├── main.py                     # main runner / scheduler
+├── requirements.txt
+└── README.md
+```

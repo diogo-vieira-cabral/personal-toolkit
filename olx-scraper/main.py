@@ -8,7 +8,7 @@ from scraper import search_olx
 # LOAD CONFIG FILE
 # ========================
 
-with open("config.yaml", "r") as file:
+with open("config.yml", "r") as file:
     config = yaml.safe_load(file)
 
 search_keywords = config["search"]["keywords"]
