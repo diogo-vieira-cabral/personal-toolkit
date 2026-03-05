@@ -4,17 +4,26 @@ _Images:
   - .jpeg
   - .png
   - .gif
+  - .bmp
 
 _Videos:
   - .mp4
   - .mkv
   - .mov
+  - .avi
 
 _Music:
   - .mp3
   - .wav
+  - .flac
+  - .aac
 
 _Documents:
   - .pdf
   - .docx
   - .xlsx
+
+_Books:
+  - .epub
+  - .mobi
+  - .AZW3
