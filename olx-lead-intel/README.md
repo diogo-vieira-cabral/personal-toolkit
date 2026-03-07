@@ -13,7 +13,7 @@ It's also the first stage of a larger pipeline: structured lead data feeding int
 
 Built to solve a real problem while learning data engineering by doing.
 
----gg
+---
 
 ## What it does
 
