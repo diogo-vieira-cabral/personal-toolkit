@@ -1,0 +1,117 @@
+2026-03-07 00:57:42,649 [INFO] === Cycle 1 started ===
+2026-03-07 00:57:51,828 [ERROR] Cycle 1 failed: 'NoneType' object has no attribute 'empty'
+Traceback (most recent call last):
+  File "/Users/vieiracabral/Desktop/GitHub/automation-lab/olx-lead-intel/main.py", line 77, in run
+    save_results(df)
+    ~~~~~~~~~~~~^^^^
+  File "/Users/vieiracabral/Desktop/GitHub/automation-lab/olx-lead-intel/main.py", line 43, in save_results
+    if df.empty:
+       ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'empty'
+2026-03-07 00:57:51,829 [INFO] === Cycle 1 complete. Sleeping 30m ===
+
+2026-03-07 01:14:54,903 [INFO] === Cycle 1 started ===
+2026-03-07 01:14:54,903 [INFO] Searching: 'assistente administrativo'
+2026-03-07 01:14:56,655 [INFO] 'assistente administrativo': 0 new listings found
+2026-03-07 01:15:01,077 [INFO] Searching: 'assistente contabilidade'
+2026-03-07 01:15:02,516 [INFO] 'assistente contabilidade': 0 new listings found
+2026-03-07 01:15:08,678 [INFO] Searching: 'analista dados'
+2026-03-07 01:15:10,096 [INFO] 'analista dados': 0 new listings found
+2026-03-07 01:15:16,388 [INFO] Searching: 'gestor dados'
+2026-03-07 01:15:22,534 [INFO] 'gestor dados': 0 new listings found
+2026-03-07 01:15:28,677 [INFO] Searching: 'técnico informática'
+2026-03-07 01:15:30,226 [INFO] 'técnico informática': 0 new listings found
+2026-03-07 01:15:36,954 [INFO] No new listings found this cycle.
+2026-03-07 01:15:36,955 [INFO] === Cycle 1 complete. Sleeping 30m ===
+
+2026-03-07 02:10:35,234 [INFO] === Cycle 1 started ===
+2026-03-07 02:10:35,235 [INFO] Searching: 'assistente administrativo'
+2026-03-07 02:10:36,800 [INFO] 'assistente administrativo': 0 new listings found
+2026-03-07 02:10:42,210 [INFO] Searching: 'assistente contabilidade'
+2026-03-07 02:10:44,348 [INFO] 'assistente contabilidade': 0 new listings found
+2026-03-07 02:10:52,186 [INFO] Searching: 'analista dados'
+2026-03-07 02:10:53,709 [INFO] 'analista dados': 0 new listings found
+2026-03-07 02:11:00,524 [INFO] Searching: 'gestor dados'
+2026-03-07 02:11:01,844 [INFO] 'gestor dados': 0 new listings found
+2026-03-07 02:11:05,926 [INFO] Searching: 'técnico informática'
+2026-03-07 02:11:07,248 [INFO] 'técnico informática': 0 new listings found
+2026-03-07 02:11:15,085 [INFO] No new listings found this cycle.
+2026-03-07 02:11:15,086 [INFO] === Cycle 1 complete. Sleeping 30m ===
+
+2026-03-07 02:33:49,820 [INFO] === Cycle 1 started ===
+2026-03-07 02:33:50,936 [INFO] Searching: 'assistente administrativo'
+2026-03-07 02:34:00,432 [INFO] 'assistente administrativo': 41 listings found on page
+2026-03-07 02:34:09,771 [INFO] 🚨 MATCH — score=15 | ASSISTENTE ADMINISTRATIVO(A) / MARKETING (M/F) | https://www.olx.pt/anuncio/emprego/assistente-administrativoa-marketing-m-f-IDJger9.html?search_reason=search%7Cpromoted
+2026-03-07 02:34:19,372 [INFO] 🚨 MATCH — score=15 | Assistente de backoffice 10:00-18:30 Odivelas | https://www.olx.pt/anuncio/emprego/assistente-de-backoffice-1000-1830-odivelas-IDJdWSC.html?search_reason=search%7Corganic
+2026-03-07 02:34:41,684 [INFO] 🚨 MATCH — score=27 | Assistente Virtual - Remoto, Projeto Temporário, 1800€/mensais | https://www.olx.pt/anuncio/emprego/assistente-virtual-remoto-projeto-temporrio-1800-mensais-IDJh4dS.html?search_reason=search%7Corganic
+2026-03-07 02:35:14,664 [INFO] 🚨 MATCH — score=20 | Assistente administrativo | https://www.olx.pt/anuncio/emprego/assistente-administrativo-IDJfZv4.html?search_reason=search%7Corganic
+2026-03-07 02:35:25,984 [INFO] 🚨 MATCH — score=19 | Assistente Administrativo(a) | https://www.olx.pt/anuncio/emprego/assistente-administrativoa-IDJfESh.html?search_reason=search%7Corganic
+2026-03-07 02:36:32,617 [INFO] 🚨 MATCH — score=18 | Assistente Consultório | Caselas | https://www.olx.pt/anuncio/emprego/assistente-consultrio-caselas-IDJcPV7.html?search_reason=search%7Corganic
+2026-03-07 02:37:03,802 [INFO] 🚨 MATCH — score=23 | Vaga de Emprego: Assistente Operacional | https://www.olx.pt/anuncio/emprego/vaga-de-emprego-assistente-operacional-IDJfMhA.html?search_reason=search%7Corganic
+2026-03-07 02:37:37,396 [INFO] 🚨 MATCH — score=26 | Assistente de Backoffice Comercial (m/f) | https://www.olx.pt/anuncio/emprego/assistente-de-backoffice-comercial-m-f-IDJg0WW.html?search_reason=search%7Corganic
+2026-03-07 02:38:24,917 [INFO] 🚨 MATCH — score=26 | Assistente Administrativo(a) – Construção Civil | https://www.olx.pt/anuncio/emprego/assistente-administrativoa-construo-civil-IDJgSTW.html?search_reason=search%7Corganic
+2026-03-07 02:38:36,264 [INFO] 🚨 MATCH — score=20 | Assistente Administrativo/a | Instalações Elétricas | https://www.olx.pt/anuncio/emprego/assistente-administrativo-a-instalaes-eltricas-IDJgyvJ.html?search_reason=search%7Corganic
+2026-03-07 02:38:49,097 [INFO] 🚨 MATCH — score=21 | Precisa-se de assistente de Decoradora de Interiores | https://www.olx.pt/anuncio/emprego/precisa-se-de-assistente-de-decoradora-de-interiores-IDJfO3t.html?search_reason=search%7Corganic
+2026-03-07 02:39:16,926 [WARNING] Could not load ad page https://www.olx.pt/anuncio/emprego/assistente-administrativo-IDJfm2r.html?search_reason=search%7Corganic: Page.goto: Timeout 20000ms exceeded.
+Call log:
+  - navigating to "https://www.olx.pt/anuncio/emprego/assistente-administrativo-IDJfm2r.html?search_reason=search%7Corganic", waiting until "networkidle"
+
+2026-03-07 02:40:19,377 [WARNING] Could not load ad page https://www.olx.pt/anuncio/emprego/recrutamos-assistente-administrativa-m-f-setor-imobilirio-IDJcojr.html?search_reason=search%7Corganic: Page.goto: Timeout 20000ms exceeded.
+Call log:
+  - navigating to "https://www.olx.pt/anuncio/emprego/recrutamos-assistente-administrativa-m-f-setor-imobilirio-IDJcojr.html?search_reason=search%7Corganic", waiting until "networkidle"
+
+2026-03-07 02:40:45,249 [INFO] 🚨 MATCH — score=20 | Assistente Administrativo/a | https://www.olx.pt/anuncio/emprego/assistente-administrativo-a-IDJeY0i.html?search_reason=search%7Corganic
+2026-03-07 02:41:31,347 [INFO] 🚨 MATCH — score=30 | Assistente Virtual - Gestão Administrativa e Suporte de Negócio | https://www.olx.pt/anuncio/emprego/assistente-virtual-gesto-administrativa-e-suporte-de-negcio-IDJgJlQ.html?search_reason=search%7Corganic
+2026-03-07 02:41:42,385 [INFO] 🚨 MATCH — score=20 | Assistente Administrativa (M/F) | https://www.olx.pt/anuncio/emprego/assistente-administrativa-m-f-IDJgB6e.html?search_reason=search%7Corganic
+2026-03-07 02:42:05,089 [INFO] 🚨 MATCH — score=15 | Assistente Administrativo/a - Instalações Elétricas | https://www.olx.pt/anuncio/emprego/assistente-administrativo-a-instalaes-eltricas-IDJf0rR.html?search_reason=search%7Corganic
+2026-03-07 02:42:15,986 [INFO] 🚨 MATCH — score=25 | Assistente Virtual - (Remoto, Projeto Temporário) | https://www.olx.pt/anuncio/emprego/assistente-virtual-remoto-projeto-temporrio-IDJh4b2.html?search_reason=search%7Corganic
+2026-03-07 02:42:18,238 [INFO] 'assistente administrativo': 41 new listings added
+2026-03-07 02:42:25,343 [INFO] Searching: 'assistente contabilidade'
+2026-03-07 02:42:35,021 [INFO] 'assistente contabilidade': 40 listings found on page
+2026-03-07 02:42:55,743 [INFO] 🚨 MATCH — score=28 | Assistente de Contabilidade | https://www.olx.pt/anuncio/emprego/assistente-de-contabilidade-IDJgWul.html?search_reason=search%7Corganic
+2026-03-07 02:43:07,376 [INFO] 🚨 MATCH — score=29 | Assistente de Contabilidade (M/F)- Esposende | https://www.olx.pt/anuncio/emprego/assistente-de-contabilidade-m-f-esposende-IDJg795.html?search_reason=search%7Corganic
+2026-03-07 02:43:19,662 [INFO] 🚨 MATCH — score=25 | Administrativo para faturação e contratações | https://www.olx.pt/anuncio/emprego/administrativo-para-faturao-e-contrataes-IDJgrDq.html?search_reason=search%7Corganic
+2026-03-07 02:43:57,268 [INFO] 🚨 MATCH — score=15 | Estamos a recrutar – Administrativo/a com Experiência | https://www.olx.pt/anuncio/emprego/estamos-a-recrutar-administrativo-a-com-experincia-IDJgVCl.html?search_reason=search%7Corganic
+2026-03-07 02:44:24,331 [WARNING] Could not load ad page https://www.olx.pt/anuncio/emprego/rcepcionista-de-oficina-automvele-IDJglG6.html?search_reason=search%7Corganic: Page.goto: Timeout 20000ms exceeded.
+Call log:
+  - navigating to "https://www.olx.pt/anuncio/emprego/rcepcionista-de-oficina-automvele-IDJglG6.html?search_reason=search%7Corganic", waiting until "networkidle"
+
+2026-03-07 02:44:45,464 [INFO] 🚨 MATCH — score=17 | Contabilista em part-time | https://www.olx.pt/anuncio/emprego/contabilista-em-part-time-IDJevn1.html?search_reason=search%7Corganic
+2026-03-07 02:44:55,854 [INFO] 🚨 MATCH — score=17 | Controller financeiro/Adminitrativo(a) | https://www.olx.pt/anuncio/emprego/controller-financeiro-adminitrativoa-IDJfvgl.html?search_reason=search%7Corganic
+2026-03-07 02:45:09,179 [INFO] 🚨 MATCH — score=24 | Tecnica administrativa | https://www.olx.pt/anuncio/emprego/tecnica-administrativa-IDJfZy2.html?search_reason=search%7Corganic
+2026-03-07 02:45:25,021 [INFO] 'assistente contabilidade': 13 new listings added
+2026-03-07 02:45:28,405 [INFO] Searching: 'analista dados'
+2026-03-07 02:45:39,249 [INFO] 'analista dados': 40 listings found on page
+2026-03-07 02:46:10,604 [INFO] 🚨 MATCH — score=21 | Vaga: Secretária Administrativa | https://www.olx.pt/anuncio/emprego/vaga-secretria-administrativa-IDJfzgy.html?search_reason=search%7Corganic
+2026-03-07 02:46:33,895 [INFO] 🚨 MATCH — score=15 | ADMINISTRATIVO/A para empresa de Mediação Imobiliária. | https://www.olx.pt/anuncio/emprego/administrativo-a-para-empresa-de-mediao-imobiliria-IDJgM7N.html?search_reason=search%7Corganic
+2026-03-07 02:47:56,726 [INFO] 🚨 MATCH — score=15 | Auxiliar Administrativo Linda a Velha - Entrada imediata | https://www.olx.pt/anuncio/emprego/auxiliar-administrativo-linda-a-velha-entrada-imediata-IDHGbpk.html?search_reason=search%7Corganic
+2026-03-07 02:48:58,224 [INFO] 'analista dados': 17 new listings added
+2026-03-07 02:49:05,855 [INFO] Searching: 'gestor dados'
+2026-03-07 02:49:35,857 [ERROR] Failed on keyword 'gestor dados': Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.olx.pt/emprego/q-gestor-dados/", waiting until "networkidle"
+
+2026-03-07 02:49:35,857 [INFO] Searching: 'técnico informática'
+2026-03-07 02:49:45,252 [INFO] 'técnico informática': 45 listings found on page
+2026-03-07 02:49:52,197 [INFO] 🚨 MATCH — score=20 | Medidor Orçamentista Junior (M/F) | https://www.olx.pt/anuncio/emprego/medidor-oramentista-junior-m-f-IDJh7oM.html?search_reason=search%7Cpromoted
+2026-03-07 02:50:02,469 [INFO] 🚨 MATCH — score=20 | Assistente administrativo | https://www.olx.pt/anuncio/emprego/assistente-administrativo-IDJfZv4.html?reason=listing%7Cplatform-rp3beta_base&search_reason=search%7Crecommended
+2026-03-07 02:51:53,973 [INFO] 🚨 MATCH — score=22 | Técnico Administrativo Financeiro | https://www.olx.pt/anuncio/emprego/tcnico-administrativo-financeiro-IDJh5hJ.html?search_reason=search%7Corganic
+2026-03-07 02:52:18,755 [INFO] 🚨 MATCH — score=19 | Técnico Administrativo (M/F) Albufeira | https://www.olx.pt/anuncio/emprego/tcnico-administrativo-m-f-albufeira-IDJgZZY.html?search_reason=search%7Corganic
+2026-03-07 02:52:38,857 [INFO] 🚨 MATCH — score=16 | REF134 - Técnico(a) de Apoio à Produção | https://www.olx.pt/anuncio/emprego/ref134-tcnicoa-de-apoio-produo-IDIZjDh.html?search_reason=search%7Corganic
+2026-03-07 02:52:49,884 [INFO] 🚨 MATCH — score=15 | Técnico de Compras e Apoio à Produção (m/f) | https://www.olx.pt/anuncio/emprego/tcnico-de-compras-e-apoio-produo-m-f-IDJbOMl.html?search_reason=search%7Corganic
+2026-03-07 02:53:53,352 [INFO] 🚨 MATCH — score=17 | Tecnico telecomunicações | https://www.olx.pt/anuncio/emprego/tecnico-telecomunicaes-IDJgNDb.html?search_reason=search%7Corganic
+2026-03-07 02:54:06,413 [INFO] 🚨 MATCH — score=21 | Técnico de Compras e Apoio à Produção (m/f) | https://www.olx.pt/anuncio/emprego/tcnico-de-compras-e-apoio-produo-m-f-IDJbywx.html?search_reason=search%7Corganic
+2026-03-07 02:54:34,293 [WARNING] Could not load ad page https://www.olx.pt/anuncio/emprego/tcnico-reparao-e-manuteno-de-eletrodomsticos-ref-117335-IDJgQUS.html?search_reason=search%7Corganic: Page.goto: Timeout 20000ms exceeded.
+Call log:
+  - navigating to "https://www.olx.pt/anuncio/emprego/tcnico-reparao-e-manuteno-de-eletrodomsticos-ref-117335-IDJgQUS.html?search_reason=search%7Corganic", waiting until "networkidle"
+
+2026-03-07 02:55:33,905 [WARNING] Could not load ad page https://www.olx.pt/anuncio/emprego/tecnico-de-telecomunicacoes-rede-cliente-IDJdrJQ.html?search_reason=search%7Corganic: Page.goto: Timeout 20000ms exceeded.
+Call log:
+  - navigating to "https://www.olx.pt/anuncio/emprego/tecnico-de-telecomunicacoes-rede-cliente-IDJdrJQ.html?search_reason=search%7Corganic", waiting until "networkidle"
+
+2026-03-07 02:55:57,408 [INFO] 🚨 MATCH — score=16 | Profissional de Logística | Telecomunicações | TF FRANCO | https://www.olx.pt/anuncio/emprego/profissional-de-logstica-telecomunicaes-tf-franco-IDIXc49.html?search_reason=search%7Corganic
+2026-03-07 02:56:55,011 [INFO] 🚨 MATCH — score=19 | Técnico de Compras (M/F)- Braga | https://www.olx.pt/anuncio/emprego/tcnico-de-compras-m-f-braga-IDJgyq8.html?search_reason=search%7Corganic
+2026-03-07 02:57:46,623 [INFO] 'técnico informática': 40 new listings added
+2026-03-07 02:57:49,951 [INFO] Saved 111 new listing(s) to data/jobs.csv
+2026-03-07 02:57:49,951 [INFO] === Cycle 1 complete. Sleeping 30m ===
+
