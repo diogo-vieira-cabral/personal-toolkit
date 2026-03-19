@@ -67,12 +67,14 @@ def save_results(df):
     output_path = Path("data/jobs.csv")
     write_header = not output_path.exists()
 
+    import csv
     df.to_csv(
         output_path,
         mode="a",
         index=False,
         header=write_header,
         encoding="utf-8",
+        quoting=csv.QUOTE_ALL,   # Wrap every field in quotes — prevents comma splits
     )
 
     log.info(f"Saved {len(df)} new listing(s) to {output_path}")
