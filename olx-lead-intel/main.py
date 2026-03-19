@@ -1,7 +1,7 @@
 import yaml
 import time
+import random
 import logging
-from datetime import datetime
 from pathlib import Path
 
 from scraper import search_olx
@@ -15,8 +15,6 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 # ── Ensure folders exist ───────────────────────────────────────────────────────
-# Path().mkdir() creates the folder if it doesn't exist yet.
-# exist_ok=True means it won't crash if the folder is already there.
 Path("data").mkdir(exist_ok=True)
 Path("logs").mkdir(exist_ok=True)
 
@@ -24,34 +22,54 @@ Path("logs").mkdir(exist_ok=True)
 with open("config.yml", "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
 
-search_keywords = config["search"]["keywords"]
-scoring_rules = config["scoring"]["rules"]
+mode = config["search"].get("mode", "keyword")
+
+if mode == "category":
+    search_targets = config["search"]["categories"]
+else:
+    search_targets = config["search"]["keywords"]
+
+# Flatten scoring categories into a single rules dict for the scorer
+# scorer.py receives: { keyword: points, ... }
+scoring_rules = {}
+for category_name, category_data in config["scoring"]["categories"].items():
+    for keyword, points in category_data["keywords"].items():
+        # If keyword appears in multiple categories, take the highest value
+        if keyword not in scoring_rules or scoring_rules[keyword] < points:
+            scoring_rules[keyword] = points
+
+scoring_config = config["scoring"]  # Full config passed for caps + bonuses
 alert_score = config["alerts"]["min_score"]
-interval_seconds = config["schedule"]["interval_minutes"] * 60
+telegram_threshold = config["alerts"]["telegram_threshold"]
+
+tier1_keywords = config["tier1"]["gate_keywords"]
+
+
+# ── Interval helper ────────────────────────────────────────────────────────────
+def get_interval_seconds() -> int:
+    """
+    Returns sleep interval in seconds.
+    If config says 'random', picks a value between 18-35 minutes.
+    Otherwise uses the configured integer directly.
+    """
+    interval = config["schedule"]["interval_minutes"]
+    if interval == "random":
+        return random.randint(18, 35) * 60
+    return int(interval) * 60
 
 
 # ── Export results ─────────────────────────────────────────────────────────────
 def save_results(df):
-    """
-    Appends new results to the master CSV.
-
-    Why CSV instead of Excel here?
-    - CSV can be appended to without loading the whole file
-    - Excel requires reading → modifying → rewriting the entire file each time
-    - CSV also loads directly into PostgreSQL later — one less conversion step
-    """
     if df.empty:
         log.info("No new listings found this cycle.")
         return
 
     output_path = Path("data/jobs.csv")
-
-    # header=True only on first write, so we don't repeat column names
     write_header = not output_path.exists()
 
     df.to_csv(
         output_path,
-        mode="a",  # append, never overwrite
+        mode="a",
         index=False,
         header=write_header,
         encoding="utf-8",
@@ -66,26 +84,27 @@ def run():
 
     while True:
         cycle += 1
-        log.info(f"=== Cycle {cycle} started ===")
+        log.info(f"=== Cycle {cycle} started — mode: {mode} ===")
 
         try:
             df = search_olx(
-                keywords=search_keywords,
+                targets=search_targets,
+                mode=mode,
                 scoring_rules=scoring_rules,
+                scoring_config=scoring_config,
+                tier1_keywords=tier1_keywords,
                 alert_score=alert_score,
+                telegram_threshold=telegram_threshold,
+                pages_per_category=config["schedule"].get("pages_per_category", 4),
             )
             save_results(df)
 
         except Exception as e:
-            # Notice: we DO use a broad except here — but we LOG it.
-            # The difference: we know it failed, we see why, and the
-            # loop continues instead of the whole script dying.
             log.error(f"Cycle {cycle} failed: {e}", exc_info=True)
 
-        log.info(
-            f"=== Cycle {cycle} complete. Sleeping {interval_seconds // 60}m ===\n"
-        )
-        time.sleep(interval_seconds)
+        interval = get_interval_seconds()
+        log.info(f"=== Cycle {cycle} complete. Sleeping {interval // 60}m ===\n")
+        time.sleep(interval)
 
 
 if __name__ == "__main__":
