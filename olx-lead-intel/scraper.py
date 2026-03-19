@@ -72,32 +72,76 @@ def get_company_tag(page) -> str:
     return ""
 
 
+def extract_company_name(page_text: str) -> str:
+    """
+    Attempts to extract a company name from the raw ad body text.
+    OLX ads often include patterns like:
+        "Empresa: XYZ Lda"
+        "Nome da Empresa: ABC Unipessoal"
+        "A empresa XYZ procura..."
+        "Sobre a XYZ:"
+    Returns best candidate or empty string.
+    """
+    patterns = [
+        r"(?:empresa|nome da empresa|companhia)\s*[:\-]\s*([A-ZÀ-Ú][^\n]{3,60})",
+        r"(?:A empresa|O grupo|A [A-ZÀ-Ú][a-zA-ZÀ-ú]+)\s+([A-ZÀ-Ú][A-Za-zÀ-ú\s&,\.\-]{3,50}(?:Lda|S\.A\.|Unipessoal|S\.L\.|LDA|SA))",
+        r"([A-ZÀ-Ú][A-Za-zÀ-ú\s&,\.\-]{2,40}(?:Lda|S\.A\.|Unipessoal|LDA|SA)\.?)",
+        r"NIF\s*[:\-]?\s*\d{9}.*?([A-ZÀ-Ú][^\n]{3,50}(?:Lda|Unipessoal|S\.A\.))",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, page_text, re.IGNORECASE | re.MULTILINE)
+        if match:
+            candidate = match.group(1).strip().rstrip(".,;")
+            if len(candidate) > 3:
+                return candidate
+    return ""
+
+
 def build_empty_row(title: str, url: str, category: str, timestamp: str) -> dict:
     return {
+        # ── Ad data ────────────────────────────────────────────────────────────
         "timestamp": timestamp,
         "title": title,
         "url": url,
         "category": category,
-        "company_tag": "",
+
+        # ── Company (scraped from ad page) ─────────────────────────────────────
+        "company_name": "",        # Extracted from ad body text (e.g. "Empresa: XYZ Lda")
+        "company_tag": "",         # OLX platform element — not always present
+
+        # ── Scoring ────────────────────────────────────────────────────────────
         "score": 0,
         "categories_matched": "",
         "keywords_matched": "",
+
+        # ── Tier 1 ─────────────────────────────────────────────────────────────
         "tier1_passed": False,
-        "company_registered": "",
-        "company_sector": "",
-        "company_size_band": "",
-        "racius_url": "",
-        "enrichment_score_delta": "",
+
+        # ── Enrichment — Stage 1: Legitimacy (Racius/Einforma) ─────────────────
+        "company_registered": "",      # True / False / unknown
+        "company_nif": "",             # Tax ID if found on Racius
+        "company_sector": "",          # Sector/CAE from registry
+        "company_size_band": "",       # micro / small / medium / large
+        "company_founded_year": "",    # Year of incorporation
+        "racius_url": "",              # Direct link to Racius profile
+        "enrichment_score_delta": "",  # +5 / -5 / -10 score adjustment
+
+        # ── Enrichment — Stage 2: Contact finding ──────────────────────────────
         "company_website": "",
         "contact_name": "",
-        "contact_title": "",
+        "contact_title": "",           # Gerente / Fundador / Director / etc.
         "contact_email": "",
-        "contact_source": "",
-        "contact_confidence": "",
+        "contact_phone": "",           # Fallback if no email found
+        "contact_source": "",          # website | linkedin_google | manual
+        "contact_confidence": "",      # direct | inferred | unknown
+
+        # ── Outreach tracking ──────────────────────────────────────────────────
         "outreach_sent": "",
         "outreach_date": "",
+        "outreach_channel": "",        # email / linkedin / phone
         "response_received": "",
         "response_date": "",
+        "response_type": "",           # positive / negative / follow_up_needed
         "notes": "",
     }
 
@@ -260,7 +304,11 @@ def scrape_targets(
                     links = inspect_links(page, debug_label)
                     log.info(f"'{target}' page {page_url}: {len(links)} listings found")
 
-                    new_count = 0
+                    count_total = 0
+                    count_seen = 0
+                    count_tier1_fail = 0
+                    count_below_score = 0
+                    count_saved = 0
 
                     for link in links:
                         href = link.get_attribute("href")
@@ -268,7 +316,11 @@ def scrape_targets(
                             continue
                         if not href.startswith("http"):
                             href = "https://www.olx.pt" + href
+
+                        count_total += 1
+
                         if href in seen_urls:
+                            count_seen += 1
                             continue
 
                         seen_urls.add(href)
@@ -278,26 +330,29 @@ def scrape_targets(
                         row = build_empty_row(title, href, category_label, timestamp)
 
                         if not passes_tier1(title, "", tier1_keywords):
-                            log.debug(f"Tier 1 failed — skipping: {title}")
+                            count_tier1_fail += 1
+                            log.info(f"[TIER1 FAIL] {title}")
                             continue
 
                         row["tier1_passed"] = True
-                        new_count += 1
 
                         human_pause(1.5, 4.0)
                         page_text = ""
                         company_tag = ""
+                        company_name = ""
 
                         try:
                             ad_page = context.new_page()
                             ad_page.goto(href, wait_until="domcontentloaded", timeout=20000)
                             page_text = ad_page.inner_text("body")
                             company_tag = get_company_tag(ad_page)
+                            company_name = extract_company_name(page_text)
                             ad_page.close()
                         except Exception as e:
                             log.warning(f"Could not load ad page {href}: {e}")
 
                         row["company_tag"] = company_tag
+                        row["company_name"] = company_name
 
                         combined_text = f"{title} {page_text}"
                         score, breakdown, keywords_matched = calculate_score(
@@ -308,8 +363,12 @@ def scrape_targets(
                         row["categories_matched"] = str(breakdown)
                         row["keywords_matched"] = ", ".join(keywords_matched)
 
+                        # Always log the score so we can see what's being filtered
+                        log.info(f"[SCORE] {score:>3} | {title[:70]}")
+
                         if score >= alert_score:
                             rows.append(row)
+                            count_saved += 1
 
                             if score >= telegram_threshold:
                                 log.info(
@@ -320,10 +379,17 @@ def scrape_targets(
                                 log.info(
                                     f"✅ MATCH — score={score} | {title} | {href}"
                                 )
+                        else:
+                            count_below_score += 1
 
                         human_pause()
 
-                    log.info(f"'{target}': {new_count} new listings passed Tier 1")
+                    log.info(
+                        f"[SUMMARY] '{target}' p{page_num}: "
+                        f"total={count_total} | seen={count_seen} | "
+                        f"tier1_fail={count_tier1_fail} | "
+                        f"below_score={count_below_score} | saved={count_saved}"
+                    )
                     human_pause(3.0, 8.0)
 
                 except Exception as e:
