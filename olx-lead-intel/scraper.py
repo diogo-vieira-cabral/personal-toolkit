@@ -99,50 +99,48 @@ def extract_company_name(page_text: str) -> str:
 
 def build_empty_row(title: str, url: str, category: str, timestamp: str) -> dict:
     return {
-        # ── Ad data ────────────────────────────────────────────────────────────
-        "timestamp": timestamp,
-        "title": title,
-        "url": url,
-        "category": category,
-
-        # ── Company (scraped from ad page) ─────────────────────────────────────
-        "company_name": "",        # Extracted from ad body text (e.g. "Empresa: XYZ Lda")
-        "company_tag": "",         # OLX platform element — not always present
-
-        # ── Scoring ────────────────────────────────────────────────────────────
+        # ── What you read first ────────────────────────────────────────────────
         "score": 0,
+        "title": title,
+        "company_name": "",        # Extracted from ad body text
+        "company_tag": "",         # OLX platform element — not always present
+        "category": category,
+        "timestamp": timestamp,
+
+        # ── Scoring detail ─────────────────────────────────────────────────────
         "categories_matched": "",
         "keywords_matched": "",
-
-        # ── Tier 1 ─────────────────────────────────────────────────────────────
         "tier1_passed": False,
 
         # ── Enrichment — Stage 1: Legitimacy (Racius/Einforma) ─────────────────
-        "company_registered": "",      # True / False / unknown
-        "company_nif": "",             # Tax ID if found on Racius
-        "company_sector": "",          # Sector/CAE from registry
-        "company_size_band": "",       # micro / small / medium / large
-        "company_founded_year": "",    # Year of incorporation
-        "racius_url": "",              # Direct link to Racius profile
-        "enrichment_score_delta": "",  # +5 / -5 / -10 score adjustment
+        "company_registered": "",
+        "company_nif": "",
+        "company_sector": "",
+        "company_size_band": "",
+        "company_founded_year": "",
+        "racius_url": "",
+        "enrichment_score_delta": "",
 
         # ── Enrichment — Stage 2: Contact finding ──────────────────────────────
         "company_website": "",
         "contact_name": "",
-        "contact_title": "",           # Gerente / Fundador / Director / etc.
+        "contact_title": "",
         "contact_email": "",
-        "contact_phone": "",           # Fallback if no email found
-        "contact_source": "",          # website | linkedin_google | manual
-        "contact_confidence": "",      # direct | inferred | unknown
+        "contact_phone": "",
+        "contact_source": "",
+        "contact_confidence": "",
 
         # ── Outreach tracking ──────────────────────────────────────────────────
         "outreach_sent": "",
         "outreach_date": "",
-        "outreach_channel": "",        # email / linkedin / phone
+        "outreach_channel": "",
         "response_received": "",
         "response_date": "",
-        "response_type": "",           # positive / negative / follow_up_needed
+        "response_type": "",
         "notes": "",
+
+        # ── URL last — click to open, no need to read ──────────────────────────
+        "url": url,
     }
 
 
